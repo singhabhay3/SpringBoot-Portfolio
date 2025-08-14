@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Abhay Pratap Singh — Java Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/feather-icons"></script>
+
+<style>
+  :root{
+    --bg: #0b0f13;
+    --card: #111821;
+    --text: #e6f1ff;
+    --muted: #9fb3c8;
+    --accent: #00ff88;
+    --accent-2: #4df3c0;
+    --border: #1b2530;
+    --radius: 14px;
+    --fab-radius: 56px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  /* Header */
+  header{position:sticky;top:0;background:linear-gradient(180deg, rgba(11,15,19,.9), rgba(11,15,19,.6));backdrop-filter:blur(6px);border-bottom:1px solid var(--border);z-index:40}
+  .nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+  .brand{display:flex;gap:10px;align-items:center}
+  .logo-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .brand h1{font-size:15px;margin:0;font-weight:700}
+  .links{display:flex;gap:8px;align-items:center}
+  .links a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;color:var(--muted);text-decoration:none}
+  .links a:hover{color:var(--accent);background:rgba(255,255,255,0.015)}
+  .theme-btn-inline{display:none} /* moved to FAB */
+
+  /* Hero */
+  .hero{max-width:1100px;margin:36px auto;padding:0 20px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:linear-gradient(180deg,#0f151c,#0c1218);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:12px}
+  .spark{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .h-title{font-size:40px;line-height:1.05;margin:12px 0 10px;font-weight:800}
+  .typing{display:inline-block;border-right:3px solid var(--accent);white-space:nowrap;overflow:hidden}
+  .h-sub{color:var(--muted);max-width:560px}
+  .cta{display:flex;gap:12px;margin-top:18px}
+  .btn{appearance:none;border:none;cursor:pointer;font-weight:700;padding:12px 16px;border-radius:12px}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#05130c;box-shadow:0 8px 30px rgba(0,255,136,.12)}
+  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+
+  /* Illustration card */
+  .art{position:relative;background: radial-gradient(1200px 400px at -10% -10%, rgba(0,255,136,.06), transparent 40%), linear-gradient(180deg, #0e141a, #0a0f14);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.45);padding:18px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .art .mode-toggle{position:absolute;top:12px;right:12px;border:1px solid var(--border);background:rgba(17,24,33,.6);backdrop-filter:blur(6px);color:var(--text);padding:8px 10px;border-radius:10px;font-size:12px;cursor:pointer}
+  svg{max-width:100%;height:auto;display:block}
+
+  /* Sections */
+  section{max-width:1100px;margin:46px auto;padding:0 20px}
+  .section-title{font-size:20px;margin:0 0 14px 0;display:flex;align-items:center;gap:10px}
+  .section-title .bar{width:10px;height:10px;border-radius:2px;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+
+  /* Cards */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  .skills-wrap{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:8px 12px;border-radius:999px;border:1px solid #1f2a35;background:linear-gradient(180deg,#0f151c,#0c1218);color:var(--text);font-size:13px;box-shadow:0 0 12px rgba(0,255,136,.06)}
+  .chip.glow{border-color:rgba(0,255,136,.45);box-shadow:0 0 18px rgba(0,255,136,.12)}
+
+  /* Projects */
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .project p{color:var(--muted);margin:6px 0 0 0}
+  .p-buttons{display:flex;gap:8px;margin-top:12px}
+  .p-buttons a{padding:8px 10px;border-radius:10px;text-decoration:none;border:1px solid var(--border);color:var(--text);font-weight:600}
+  .p-buttons a:hover{border-color:var(--accent);box-shadow:0 0 14px rgba(0,255,136,.12)}
+
+  /* Contact */
+  .contact{display:flex;gap:12px;flex-wrap:wrap}
+  .contact a{padding:10px 12px;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);font-weight:600}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border);padding:24px 20px;color:var(--muted);text-align:center}
+
+  /* Reveal on scroll */
+  [data-animate]{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .show{opacity:1 !important; transform:translateY(0) !important}
+
+  /* SVG Animations */
+  .blink { animation: blink 1s steps(2, start) infinite; }
+  @keyframes blink { to { opacity: .15; } }
+  .flicker { animation: flicker 3s infinite; }
+  @keyframes flicker { 0%,19%,22%,62%,64%,100% { opacity: 1 } 20%,63% { opacity:.75 } 21% { opacity:.6 } }
+  .steam { animation: steam 4s ease-in-out infinite; transform-origin: 50% 100%; }
+  @keyframes steam { 0% { opacity:0; transform: translateY(8px) scale(.95); } 20% { opacity:.6 } 100% { opacity:0; transform: translateY(-28px) scale(1.05);} }
+  .float { animation: float 6s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+  .cursor { animation: cur 1.1s steps(2,end) infinite; }
+  @keyframes cur { 50% {opacity:0;} }
+
+  /* LED + Keyboard backlight wave */
+  .blink-led { animation: ledBlink 1.2s steps(2, start) infinite; filter: drop-shadow(0 0 6px var(--accent)); }
+  @keyframes ledBlink { to { opacity: 0.25; } }
+  .key { animation: keyGlow 2.8s ease-in-out infinite; fill:#0f2330 }
+  .key.wave { animation-delay: var(--d, 0s) }
+  @keyframes keyGlow { 0%,100% { fill:#0f2330 } 50% { fill: var(--accent) } }
+
+  /* FAB: semi-circle 120deg (we place three options along arc) */
+  .fab-container { position:fixed;right:22px;bottom:22px;z-index:80;display:block }
+  .fab-main { width:var(--fab-radius);height:var(--fab-radius);border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#05130c;cursor:pointer;border:none;box-shadow:0 8px 30px rgba(0,255,136,.18);transition:transform .15s ease; animation:fabPulse 2.2s infinite; }
+  @keyframes fabPulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+  .fab-main:focus{outline:3px solid rgba(0,255,136,.12)}
+  .fab-options{position:absolute;right:0;bottom:0;width:300px;height:300px;pointer-events:none}
+  /* place each option absolutely at origin (bottom-right) and translate when open */
+  .fab-wrap{position:absolute;right:0;bottom:0;display:flex;align-items:center;gap:10px;transform-origin:50% 50%}
+  .fab-option{position:absolute;right:0;bottom:0;width:48px;height:48px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text);box-shadow:0 8px 22px rgba(0,0,0,.45);transition:transform .35s cubic-bezier(.2,.9,.29,1), opacity .25s;opacity:0;pointer-events:none}
+  .fab-option:hover{background:var(--accent);color:#05130c;box-shadow:0 12px 28px rgba(0,255,136,.2)}
+  .fab-label{position:absolute;right:62px;bottom:10px;background:rgba(5,9,11,.9);padding:7px 10px;border-radius:8px;color:var(--accent);font-weight:700;font-size:13px;opacity:0;transform:translateX(6px);transition:opacity .2s ease, transform .2s ease;pointer-events:none}
+  .fab-item{display:flex;align-items:center}
+  /* positions for 3 options along arc: angles 210°, 240°, 270° with radius ~100px */
+  .fab-container.open .fab-option { opacity:1; pointer-events:auto }
+  .fab-container.open .opt-1 { transform: translate(-78px, -48px) scale(1); transition-delay: .05s }
+  .fab-container.open .opt-2 { transform: translate(-46px, -88px) scale(1); transition-delay: .12s }
+  .fab-container.open .opt-3 { transform: translate(0px, -110px) scale(1); transition-delay: .18s }
+  .fab-option { transform: translate(0,0) scale(.6) } /* default closed state scaled down */
+  /* labels show on hover of the item container */
+  .fab-item:hover .fab-label{opacity:1;transform:translateX(0)}
+  /* small stagger fade-in */
+  .fab-option svg { width:18px; height:18px }
+
+  /* responsive */
+  @media (max-width:720px){
+    .grid-2{grid-template-columns:1fr}
+    .hero{grid-template-columns:1fr;gap:18px}
+    .fab-label{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="brand"><span class="logo-dot" aria-hidden="true"></span><h1>Abhay Pratap Singh</h1></div>
+    <div class="links" role="navigation" aria-label="Main">
+      <a href="#about" aria-label="About" title="About"><i data-feather="user"></i></a>
+      <a href="#skills" aria-label="Skills" title="Skills"><i data-feather="code"></i></a>
+      <a href="#projects" aria-label="Projects" title="Projects"><i data-feather="folder"></i></a>
+      <a href="#contact" aria-label="Contact" title="Contact"><i data-feather="mail"></i></a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div>
+    <span class="pill"><span class="spark" aria-hidden="true"></span> Java • Spring Boot • REST APIs</span>
+    <h2 class="h-title">Architecting Backends that <span style="color:var(--accent)">Power Products</span></h2>
+    <div style="font-size:18px;margin:8px 0 16px 0;color:var(--muted)"><span id="type" class="typing" aria-live="polite"></span></div>
+    <p class="h-sub">I design and build reliable, scalable services with clean architecture, strong database modeling, and production-ready APIs.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="Abhay_Singh_resume.pdf" target="_blank" rel="noopener">📄 View Resume</a>
+      <a class="btn btn-ghost" href="Abhay_Singh_resume.pdf" download>⬇ Download Resume</a>
+    </div>
+  </div>
+
+  <div class="art" id="art" role="img" aria-label="Developer working at dual-monitor setup">
+    <button class="mode-toggle" id="modeBtn" title="Pause/Resume illustration motion">Motion: ON</button>
+
+    <!-- Animated realistic-ish SVG -->
+    <svg viewBox="0 0 680 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="bggrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0e1620"/>
+          <stop offset="100%" stop-color="#0a1218"/>
+        </linearGradient>
+        <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#07141c"/>
+          <stop offset="100%" stop-color="#0b1a24"/>
+        </linearGradient>
+        <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="10" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- background -->
+      <rect width="680" height="460" fill="url(#bggrad)"/>
+      <ellipse cx="560" cy="130" rx="150" ry="85" fill="#00ff88" opacity=".06" filter="url(#soft)" class="float"/>
+
+      <!-- desk -->
+      <rect x="60" y="320" width="560" height="24" rx="8" fill="#141d26"/>
+      <rect x="60" y="344" width="560" height="80" rx="10" fill="#101820"/>
+
+      <!-- left monitor -->
+      <rect x="95" y="120" width="230" height="150" rx="12" fill="#0d141b" stroke="#1c2a36"/>
+      <rect x="110" y="135" width="200" height="120" rx="8" fill="url(#screen)"/>
+      <g class="flicker">
+        <rect x="120" y="148" width="130" height="9" rx="4" fill="#00ff88" opacity=".95"/>
+        <rect x="120" y="164" width="170" height="9" rx="4" fill="#31ffc0" opacity=".55"/>
+        <rect x="120" y="180" width="100" height="9" rx="4" fill="#00ff88" opacity=".8"/>
+        <rect x="120" y="196" width="180" height="9" rx="4" fill="#31ffc0" opacity=".55"/>
+        <rect x="120" y="212" width="150" height="9" rx="4" fill="#00ff88" opacity=".95"/>
+      </g>
+
+      <!-- right monitor -->
+      <rect x="350" y="110" width="230" height="160" rx="12" fill="#0d141b" stroke="#1c2a36"/>
+      <rect x="365" y="125" width="200" height="130" rx="8" fill="url(#screen)"/>
+      <g>
+        <rect x="375" y="138" width="170" height="14" rx="4" fill="#0f2330"/>
+        <rect x="375" y="158" width="140" height="10" rx="4" fill="#00ff88" opacity=".85"/>
+        <rect x="375" y="174" width="180" height="10" rx="4" fill="#31ffc0" opacity=".55"/>
+        <rect x="375" y="190" width="130" height="10" rx="4" fill="#00ff88" opacity=".85"/>
+        <rect x="375" y="206" width="160" height="10" rx="4" fill="#31ffc0" opacity=".55"/>
+        <rect x="540" y="222" width="8" height="12" rx="2" fill="#00ff88" class="cursor"/>
+      </g>
+
+      <!-- stands -->
+      <rect x="205" y="270" width="20" height="20" rx="4" fill="#1a2632"/>
+      <rect x="460" y="272" width="20" height="20" rx="4" fill="#1a2632"/>
+      <rect x="178" y="290" width="76" height="8" rx="4" fill="#0d141b"/>
+      <rect x="433" y="293" width="76" height="8" rx="4" fill="#0d141b"/>
+
+      <!-- laptop base -->
+      <rect x="270" y="356" width="140" height="70" rx="10" fill="#131c25" stroke="#1d2a36"/>
+      <rect x="282" y="370" width="116" height="10" rx="4" fill="#0f2330"/>
+
+      <!-- keyboard rows with wave (each key has inline --d delay via style attribute) -->
+      <g>
+        <rect x="286" y="372" width="12" height="6" rx="2" class="key wave" style="--d:0s"/>
+        <rect x="300" y="372" width="12" height="6" rx="2" class="key wave" style="--d:.1s"/>
+        <rect x="314" y="372" width="12" height="6" rx="2" class="key wave" style="--d:.2s"/>
+        <rect x="328" y="372" width="12" height="6" rx="2" class="key wave" style="--d:.3s"/>
+        <rect x="342" y="372" width="12" height="6" rx="2" class="key wave" style="--d:.4s"/>
+        <rect x="356" y="372" width="12" height="6" rx="2" class="key wave" style="--d:.5s"/>
+        <rect x="370" y="372" width="12" height="6" rx="2" class="key wave" style="--d:.6s"/>
+      </g>
+      <g>
+        <rect x="290" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.15s"/>
+        <rect x="304" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.25s"/>
+        <rect x="318" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.35s"/>
+        <rect x="332" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.45s"/>
+        <rect x="346" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.55s"/>
+        <rect x="360" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.65s"/>
+        <rect x="374" y="381" width="12" height="6" rx="2" class="key wave" style="--d:.75s"/>
+      </g>
+      <g>
+        <rect x="294" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.3s"/>
+        <rect x="308" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.4s"/>
+        <rect x="322" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.5s"/>
+        <rect x="336" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.6s"/>
+        <rect x="350" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.7s"/>
+        <rect x="364" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.8s"/>
+        <rect x="378" y="390" width="12" height="6" rx="2" class="key wave" style="--d:.9s"/>
+      </g>
+
+      <!-- tiny status LED -->
+      <circle cx="342" cy="412" r="3" fill="#00ff88" class="blink-led"/>
+
+      <!-- coffee cup -->
+      <g>
+        <rect x="470" y="360" width="28" height="30" rx="6" fill="#141d26" stroke="#223142"/>
+        <rect x="496" y="368" width="10" height="10" rx="4" fill="#141d26" stroke="#223142"/>
+        <path d="M 486 358 C 482 350, 488 344, 484 338" fill="none" stroke="#d5fff0" stroke-opacity=".5" stroke-width="2" class="steam"/>
+        <path d="M 494 356 C 490 348, 496 342, 492 336" fill="none" stroke="#d5fff0" stroke-opacity=".5" stroke-width="2" class="steam" style="animation-delay:1s"/>
+      </g>
+
+      <!-- notes -->
+      <rect x="88" y="105" width="18" height="18" rx="2" fill="#1a2632"/>
+      <rect x="560" y="98" width="18" height="18" rx="2" fill="#1a2632"/>
+
+      <!-- top ambient -->
+      <rect x="0" y="0" width="680" height="40" fill="#00ff88" opacity=".03"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" data-animate>
+  <h3 class="section-title"><span class="bar"></span> About Me</h3>
+  <div class="card">
+    <p style="margin:0;color:var(--muted)">I'm a Java backend developer focused on crafting <strong>clean, testable services</strong> with Spring Boot. I value developer experience, observability, and robust database design. I enjoy turning product ideas into reliable APIs teams love to build on.</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" data-animate>
+  <h3 class="section-title"><span class="bar"></span> Skills</h3>
+  <div class="card">
+    <div class="skills-wrap">
+      <span class="chip glow">Java</span>
+      <span class="chip glow">Spring Boot</span>
+      <span class="chip glow">REST API</span>
+      <span class="chip">JPA / Hibernate</span>
+      <span class="chip">MySQL</span>
+      <span class="chip">MongoDB</span>
+      <span class="chip">Swagger / OpenAPI</span>
+      <span class="chip">Postman</span>
+      <span class="chip">Git</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" data-animate>
+  <h3 class="section-title"><span class="bar"></span> Projects</h3>
+  <div class="grid-2">
+    <div class="card project">
+      <h3>🍔 Food Delivery App (Backend)</h3>
+      <p>Secure multi-tenant APIs for restaurants, orders, and delivery tracking with role-based auth and MySQL schema design.</p>
+      <div class="p-buttons">
+        <a href="https://github.com/singhabhay3/Food-Delivery-app" target="_blank" rel="noopener">GitHub Repo</a>
+        <a href="#" aria-disabled="true" title="Add deployed URL later">Live API</a>
+        <a href="#" aria-disabled="true" title="Add Swagger URL later">Swagger Docs</a>
+      </div>
+    </div>
+    <div class="card project">
+      <h3>🛒 E-commerce Website (Backend)</h3>
+      <p>Product catalog, cart/checkout flows, JWT auth, and payment-ready endpoints with clean controller/service layering.</p>
+      <div class="p-buttons">
+        <a href="https://github.com/singhabhay3/Ecommerce-Website-Using-SpringBoot" target="_blank" rel="noopener">GitHub Repo</a>
+        <a href="#" aria-disabled="true">Live API</a>
+        <a href="#" aria-disabled="true">Swagger Docs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" data-animate>
+  <h3 class="section-title"><span class="bar"></span> Contact</h3>
+  <div class="card contact">
+    <a href="mailto:singhabhaypartapji@gmail.com">📧 Email</a>
+    <a href="https://www.linkedin.com/in/abhay-pratap-singh-67a88125b/" target="_blank" rel="noopener">🔗 LinkedIn</a>
+    <a href="https://github.com/singhabhay3" target="_blank" rel="noopener">💻 GitHub</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Abhay Pratap Singh — Architecting Backends that Drive Frontend Brilliance
+</footer>
+
+<!-- FAB (semi-circle 120°) -->
+<div class="fab-container" id="fab">
+  <button class="fab-main" id="fabMain" aria-label="Hire me menu" title="Hire me">
+    <i data-feather="user"></i>
+  </button>
+
+  <div class="fab-options" aria-hidden="true">
+    <!-- Option 1 (closest to main) angle 210° => translate ~(-78,-48) -->
+    <div class="fab-item" style="position:absolute;right:0;bottom:0">
+      <button class="fab-option opt-1" id="fabEmail" aria-label="Email me" title="Email me">
+        <i data-feather="mail"></i>
+      </button>
+      <div class="fab-label" role="status">Email Me</div>
+    </div>
+
+    <!-- Option 2 angle 240° => translate ~(-46,-88) -->
+    <div class="fab-item" style="position:absolute;right:0;bottom:0">
+      <button class="fab-option opt-2" id="fabLinkedin" aria-label="Open LinkedIn" title="Open LinkedIn">
+        <i data-feather="linkedin"></i>
+      </button>
+      <div class="fab-label">LinkedIn</div>
+    </div>
+
+    <!-- Option 3 angle 270° => translate ~(0,-110) -->
+    <div class="fab-item" style="position:absolute;right:0;bottom:0">
+      <button class="fab-option opt-3" id="fabTheme" aria-label="Toggle theme" title="Toggle theme">
+        <i data-feather="sun"></i>
+      </button>
+      <div class="fab-label">Toggle Theme</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- feather icons ---------- */
+feather.replace();
+
+/* ---------- Typing effect ---------- */
+const phrases = [
+  'Spring Boot • REST • MySQL • MongoDB',
+  'Clean Architecture • JPA/Hibernate',
+  'Scalable APIs with great DX'
+];
+const typeEl = document.getElementById('type');
+let pi = 0, ci = 0, erasing = false;
+function tick(){
+  const full = phrases[pi];
+  if(!erasing){
+    typeEl.textContent = full.slice(0, ++ci);
+    if(ci === full.length){ erasing = true; setTimeout(tick, 1200); return; }
+  } else {
+    typeEl.textContent = full.slice(0, --ci);
+    if(ci === 0){ erasing = false; pi = (pi+1)%phrases.length; }
+  }
+  setTimeout(tick, erasing ? 35 : 45);
+}
+tick();
+
+/* ---------- Reveal on scroll ---------- */
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
+      obs.unobserve(e.target);
+    }
+  });
+},{ threshold:.18});
+document.querySelectorAll('[data-animate]').forEach(el=>obs.observe(el));
+
+/* ---------- Motion toggle for SVG (pause/resume animations) ---------- */
+const art = document.getElementById('art');
+const modeBtn = document.getElementById('modeBtn');
+let motionOn = true;
+modeBtn.addEventListener('click', ()=>{
+  motionOn = !motionOn;
+  if(!motionOn){
+    art.classList.add('no-anim');
+    modeBtn.textContent = 'Motion: OFF';
+  } else {
+    art.classList.remove('no-anim');
+    modeBtn.textContent = 'Motion: ON';
+  }
+});
+/* respect prefers-reduced-motion */
+if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  art.classList.add('no-anim'); modeBtn.textContent='Motion: OFF'; motionOn=false;
+}
+
+/* When .no-anim present, pause CSS animations by applying that class (CSS rules already handle) */
+
+/* ---------- Keyboard key delays applied via inline style earlier (CSS uses .key.wave with --d) */
+document.querySelectorAll('.key.wave').forEach(k=>{
+  const delay = getComputedStyle(k).getPropertyValue('--d') || '0s';
+  k.style.animationDelay = delay;
+});
+
+/* ---------- FAB menu logic (open/close, click outside) ---------- */
+const fab = document.getElementById('fab');
+const fabMain = document.getElementById('fabMain');
+const fabEmail = document.getElementById('fabEmail');
+const fabLinkedin = document.getElementById('fabLinkedin');
+const fabTheme = document.getElementById('fabTheme');
+
+function openFab(){ fab.classList.add('open'); fab.querySelector('.fab-options').setAttribute('aria-hidden','false'); }
+function closeFab(){ fab.classList.remove('open'); fab.querySelector('.fab-options').setAttribute('aria-hidden','true'); }
+function toggleFab(){ fab.classList.toggle('open'); fab.querySelector('.fab-options').setAttribute('aria-hidden', !fab.classList.contains('open')); }
+
+fabMain.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  toggleFab();
+});
+document.addEventListener('click', (e)=>{
+  if(!fab.contains(e.target)) closeFab();
+});
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeFab(); });
+
+/* FAB actions */
+fabEmail.addEventListener('click', ()=>{ window.location.href = 'mailto:singhabhaypartapji@gmail.com'; });
+fabLinkedin.addEventListener('click', ()=>{ window.open('https://www.linkedin.com/in/abhay-pratap-singh-67a88125b/','_blank'); });
+fabTheme.addEventListener('click', ()=>{
+  // toggle theme: set data-theme on documentElement to switch (light/dark)
+  const root = document.documentElement;
+  const now = root.getAttribute('data-theme');
+  if(now === 'light'){ root.setAttribute('data-theme','dark'); } else { root.setAttribute('data-theme','light'); }
+});
+
+/* ---------- initial theme (dark) ---------- */
+document.documentElement.setAttribute('data-theme','dark');
+
+/* ---------- optional: pause animations when reduced-motion set ---------- */
+if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.documentElement.classList.add('reduce-motion');
+}
+
+/* ---------- accessibility: keyboard focus for fab mini buttons shows labels via :focus-visible (CSS fallback) ---------- */
+</script>
+
+</body>
+</html>
